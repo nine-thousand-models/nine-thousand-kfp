@@ -28,7 +28,7 @@ data_connection_secret_name = 'aws-connection-models'
 # Create pipeline
 @dsl.pipeline(
   name='kfp-training-pipeline',
-  description='We train an amazing model 🚂'
+  description='We train an amazing model'
 )
 def training_pipeline(data_source: dict, hyperparameters: dict, model_name: str, version: str, cluster_domain: str, model_storage_pvc: str, prod_flag: bool):
     ### 🐶 Fetch Data from GitHub
