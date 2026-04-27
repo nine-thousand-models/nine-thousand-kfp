@@ -94,7 +94,7 @@ def push_to_model_registry(
 
     model_object_prefix = model_name if model_name else "model"
     version = version if version else datetime.now().strftime('%y%m%d%H%M')
-    server_address = f"https://{namespace}-registry-rest.{cluster_domain}"
+    server_address = f"https://user1-registry-rest.{cluster_domain}"
 
     registry = ModelRegistry(
         server_address=server_address,
