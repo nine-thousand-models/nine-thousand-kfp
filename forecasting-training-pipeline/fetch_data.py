@@ -9,6 +9,7 @@ from kfp.dsl import (
 )
 
 @component(base_image='python:3.9', packages_to_install=["dask[dataframe]==2024.8.0", "s3fs==2025.2.0", "pandas==2.2.3"])
+
 def fetch_data(
     data_source: dict,
     dataset: Output[Dataset]
@@ -31,7 +32,8 @@ def fetch_data(
     data.to_csv(dataset.path, index=False, header=True)
 
 
-@component(base_image='python:3.9', packages_to_install=["dvc[s3]==3.1.0", "dask[dataframe]==2024.8.0", "s3fs==2025.2.0", "pandas==2.2.3", "PyYAML==6.0.2"])
+@component(base_image='python:3.9', packages_to_install=["dvc[s3]==3.1.0", "pathspec<0.12.0", "dask[dataframe]==2024.8.0", "s3fs==2025.2.0", "pandas==2.2.3", "PyYAML==6.0.2"])
+
 def fetch_data_from_dvc(
     dataset: Output[Dataset],
     model_config: dict,
@@ -147,7 +149,7 @@ def fetch_data_from_dvc(
     print(f"Dataset saved with {len(data)} rows, DVC hash: {actual_hash}")
 
 
-@component(base_image='python:3.9', packages_to_install=["feast==0.40.0", "psycopg2>=2.9", "dask-expr==1.1.10", "s3fs==2024.6.1", "psycopg_pool==3.2.3", "psycopg==3.2.3", "pandas==2.2.3", "numpy==1.26.4"])
+@component(base_image='python:3.12', packages_to_install=["feast==0.59.0", "psycopg2-binary>=2.9", "dask-expr==1.1.10", "s3fs==2024.6.1", "psycopg_pool==3.2.3", "psycopg==3.2.3", "pandas==2.2.3"])
 def fetch_data_from_feast(
     version: str,
     dataset: Output[Dataset]
